@@ -1,4 +1,3 @@
-<img src="rice.png" width=100%>
 <p align="center">My simple suckless rice</p>
 
 <br>
