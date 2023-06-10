@@ -12,4 +12,4 @@ sudo make install
 chsh -s /bin/zsh (if zsh is not your default shell already)
 ```
 
-The packages you will need: `zsh alacritty flameshot feh JetBrainsMono Nerd Font`
+The packages you will need: `zsh alacritty flameshot feh`
