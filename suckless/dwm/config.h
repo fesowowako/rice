@@ -4,8 +4,8 @@
 static const int status_mon = 0;   	            /* <=-1: follows focused monitor, >=0: static on given mon number */
 static const int fallback_status_mon = 1;       /* fallback monitor when a fullscreen window occupies the previous mon (only when static status is on) */
 static const unsigned int refresh_rate = 60;
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const unsigned int gappx     = 8;       	/* gaps between windows */
+static const unsigned int borderpx  = 2;        /* border pixel of windows */
+static const unsigned int gappx     = 6;       	/* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int systrayonleft = 0;   	/* 0: systray in the right corner, >0: systray on left of status text */
 static const unsigned int systrayspacing = 2;   /* systray spacing */
@@ -15,29 +15,29 @@ static const int showbar            = 1;     /* 0 means no bar */
 static const int topbar             = 1;     /* 0 means bottom bar */
 static const char *fonts[]          = { "JetBrainsMono Nerd Font:size=8" };
 static const char dmenufont[]       = "JetBrainsMono Nerd Font:size=8";
-static const char col_bg[]          = "#282828";
-static const char col_fg[]          = "#d4be98";
-static const char col_red[]         = "#ea6962";
-static const char col_bg_dim[]      = "#1b1b1b";
-static const char *colors[][3]      = {
-    /*               fg         bg         border   */
-    [SchemeNorm] = { col_fg, col_bg, col_bg_dim },
-    [SchemeSel]  = { col_red, col_bg,  col_fg },
+static const char col_1[]  = "#282c34";
+static const char col_2[]  = "#282c34";
+static const char col_3[]  = "#d7d7d7";
+static const char col_4[]  = "#924441";
+static const char *colors[][3]        = {
+	/*               fg         bg         border   */
+	[SchemeNorm] = { col_3, col_1, col_2 },
+	[SchemeSel]  = { col_3, col_4, col_4 },
 };
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[0];
-// static const Rule rules[] = {
+static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-//	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-//	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
-// };
+	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
+	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+};
 
 /* layout(s) */
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
@@ -64,7 +64,7 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", col_bg, "-nf", col_fg, "-sb", col_red, "-sf", col_bg, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", col_3, "-nf", col_1, "-sb", col_2, "-sf", col_4, NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
 static const char *flamecmd[] = { "flameshot", "gui", NULL };
 
