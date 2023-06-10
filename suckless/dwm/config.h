@@ -13,8 +13,14 @@ static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display 
 static const int showsystray        = 1;     /* 0 means no systray */
 static const int showbar            = 1;     /* 0 means no bar */
 static const int topbar             = 1;     /* 0 means bottom bar */
-static const char *fonts[]          = { "JetBrainsMono Nerd Font:size=8" };
-static const char dmenufont[]       = "JetBrainsMono Nerd Font:size=8";
+static const char *fonts[]     = {"Ubuntu:weight=bold:size=8:antialias=true:hinting=true",
+                                  "Hack:size=8:antialias=true:autohint=true",
+                                  "JoyPixels:size=10:antialias=true:autohint=true"
+						     	};
+static const char dmenufont[]     = {"Ubuntu:weight=bold:size=8:antialias=true:hinting=true",
+                                  "Hack:size=8:antialias=true:autohint=true",
+                                  "JoyPixels:size=10:antialias=true:autohint=true"
+						     	};
 static const char col_1[]  = "#282c34";
 static const char col_2[]  = "#282c34";
 static const char col_3[]  = "#d7d7d7";
