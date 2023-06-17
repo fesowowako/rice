@@ -21,10 +21,6 @@ static const char *fonts[]     = {"Ubuntu:weight=bold:size=8:antialias=true:hint
                                   "Hack:size=8:antialias=true:autohint=true",
                                   "JoyPixels:size=10:antialias=true:autohint=true"
 						     	};
-static const char dmenufont[]     = {"Ubuntu:weight=bold:size=8:antialias=true:hinting=true",
-                                  "Hack:size=8:antialias=true:autohint=true",
-                                  "JoyPixels:size=10:antialias=true:autohint=true"
-						     	};
 static const char col_1[]  = "#282c34"; /* background color of bar */
 static const char col_2[]  = "#282c34"; /* border color unfocused windows */
 static const char col_3[]  = "#d7d7d7";
@@ -73,13 +69,12 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", col_3, "-nf", col_1, "-sb", col_2, "-sf", col_4, NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
 static const char *flamecmd[] = { "flameshot", "gui", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_space,  spawn,          {.v = dmenucmd } },
+	{ MODKEY|ShiftMask,		XK_Return, spawn,          {.v = (const char*[]){ "dmenu_run", NULL } } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd} },
 	{ MODKEY|ShiftMask,             XK_s,      spawn,          {.v = flamecmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
