@@ -14,6 +14,10 @@ X11LIB = /usr/X11R6/lib
 XINERAMALIBS  = -lXinerama
 XINERAMAFLAGS = -DXINERAMA
 
+# dependency on libxi and libxfixes for mouse related features
+XINPUTLIBS = -lXi
+XFIXESLIBS = -lXfixes
+
 # freetype
 FREETYPELIBS = -lfontconfig -lXft
 FREETYPEINC = /usr/include/freetype2
@@ -23,7 +27,7 @@ FREETYPEINC = /usr/include/freetype2
 
 # includes and libs
 INCS = -I${X11INC} -I${FREETYPEINC}
-LIBS = -L${X11LIB} -lX11 ${XINERAMALIBS} ${FREETYPELIBS}
+LIBS = -L${X11LIB} -lX11 ${XINERAMALIBS} ${FREETYPELIBS} ${XINPUTLIBS} ${XFIXESLIBS}
 
 # flags
 CPPFLAGS = -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_XOPEN_SOURCE=700L -DVERSION=\"${VERSION}\" ${XINERAMAFLAGS} -D_FORTIFY_SOURCE=1 -s -march=native -O2 \
