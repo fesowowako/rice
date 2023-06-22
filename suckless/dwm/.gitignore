@@ -1,4 +1,7 @@
-drw.o
+.gitignore
+*.orig
+*.rej
+util.o
 dwm
 dwm.o
-util.o
+drw.o
