@@ -209,6 +209,7 @@ static void focusmon(const Arg *arg);
 static void focusstack(const Arg *arg);
 static void genericevent(XEvent *e);
 static Atom getatomprop(Client *c, Atom prop);
+static Client *getpointerclient(void);
 static int getrootptr(int *x, int *y);
 static long getstate(Window w);
 static unsigned int getsystraywidth();
@@ -790,8 +791,8 @@ configurenotify(XEvent *e)
 						resizeclient(c, m->mx, m->my, m->mw, m->mh);
 				resizebarwin(m);
 			}
-			focus(NULL);
 			arrange(NULL);
+			focus(NULL);
 		}
 	}
 }
@@ -1158,6 +1159,8 @@ void
 focus(Client *c)
 {
 	if (!c || !ISVISIBLE(c))
+		c = getpointerclient();
+	if (!c || !ISVISIBLE(c))
 		for (c = selmon->stack; c && !ISVISIBLE(c); c = c->snext);
 	if (selmon->sel && selmon->sel != c)
 		unfocus(selmon->sel, 0);
@@ -1275,6 +1278,16 @@ getatomprop(Client *c, Atom prop)
 		XFree(p);
 	}
 	return atom;
+}
+
+Client *
+getpointerclient(void)
+{
+	Window dummy, win;
+	int di;
+	unsigned int dui;
+	XQueryPointer(dpy, root, &dummy, &win, &di, &di, &di, &di, &dui);
+	return wintoclient(win);
 }
 
 int
@@ -1974,8 +1987,8 @@ sendmon(Client *c, Monitor *m)
 	c->tags = m->tagset[m->seltags]; /* assign tags of target monitor */
 	attachbottom(c);
 	attachstack(c);
-	focus(NULL);
 	arrange(NULL);
+	focus(NULL);
 }
 
 void
@@ -2268,8 +2281,8 @@ tag(const Arg *arg)
 {
 	if (selmon->sel && arg->ui & TAGMASK) {
 		selmon->sel->tags = arg->ui & TAGMASK;
-		focus(NULL);
 		arrange(selmon);
+		focus(NULL);
 	}
 }
 
@@ -2353,8 +2366,8 @@ toggletag(const Arg *arg)
 	newtags = selmon->sel->tags ^ (arg->ui & TAGMASK);
 	if (newtags) {
 		selmon->sel->tags = newtags;
-		focus(NULL);
 		arrange(selmon);
+		focus(NULL);
 	}
 }
 
@@ -2365,8 +2378,8 @@ toggleview(const Arg *arg)
 
 	if (newtagset) {
 		selmon->tagset[selmon->seltags] = newtagset;
-		focus(NULL);
 		arrange(selmon);
+		focus(NULL);
 	}
 }
 
@@ -2421,8 +2434,8 @@ unmanage(Client *c, int destroyed)
 
 	if (!s) {
 		arrange(m);
-		focus(NULL);
 		updateclientlist();
+		focus(NULL);
 	}
 }
 
@@ -2822,8 +2835,8 @@ view(const Arg *arg)
 	selmon->seltags ^= 1; /* toggle sel tagset */
 	if (arg->ui & TAGMASK)
 		selmon->tagset[selmon->seltags] = arg->ui & TAGMASK;
-	focus(NULL);
 	arrange(selmon);
+	focus(NULL);
 }
 pid_t
 winpid(Window w)
