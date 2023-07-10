@@ -1,21 +1,33 @@
 BACKUP_DIR := ~/.config/backup
+XINITRC := ~/.xinitrc
+BASHRC := ~/.bashrc
+XRESOURCES := ~/.Xresources
+
+.PHONY: all install install-dmenu install-slstatus install-dwm install-st
 
 all:
-	cp -f ./xinitrc ~/.xinitrc
+	cp -f ./xinitrc $(XINITRC)
 	mkdir -p $(BACKUP_DIR)
-	@if [ -f ~/.bashrc ]; then \
-		cp -f ~/.bashrc $(BACKUP_DIR)/bashrc_backup; \
+	@if [ -f $(BASHRC) ]; then \
+		cp -f $(BASHRC) $(BACKUP_DIR)/bashrc_backup; \
 	fi
-	cp -f ./bashrc ~/.bashrc
-	@if [ -f ~/.Xresources ]; then \
-		cp -f ~/.Xresources $(BACKUP_DIR)/Xresources_backup; \
+	cp -f ./bashrc $(BASHRC)
+	@if [ -f $(XRESOURCES) ]; then \
+		cp -f $(XRESOURCES) $(BACKUP_DIR)/Xresources_backup; \
 	fi
-	cp -f ./xresources ~/.Xresources
-	mkdir -p ~/.config/alacritty
-	cp -f ./alacritty.yml ~/.config/alacritty/
+	cp -f ./xresources $(XRESOURCES)
 	feh --bg-scale ./bg.png
 
-install:
+install: install-dmenu install-slstatus install-dwm install-st
+
+install-dmenu:
 	$(MAKE) -C suckless/dmenu install
+
+install-slstatus:
 	$(MAKE) -C suckless/slstatus install
+
+install-dwm:
 	$(MAKE) -C suckless/dwm install
+
+install-st:
+	$(MAKE) -C suckless/st install
