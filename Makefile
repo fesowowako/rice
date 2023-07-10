@@ -5,17 +5,7 @@ XRESOURCES := ~/.Xresources
 
 .PHONY: all install install-dmenu install-slstatus install-dwm install-st
 
-all:
-	cp -f ./xinitrc $(XINITRC)
-	mkdir -p $(BACKUP_DIR)
-	@if [ -f $(BASHRC) ]; then \
-		cp -f $(BASHRC) $(BACKUP_DIR)/bashrc_backup; \
-	fi
-	cp -f ./bashrc $(BASHRC)
-	@if [ -f $(XRESOURCES) ]; then \
-		cp -f $(XRESOURCES) $(BACKUP_DIR)/Xresources_backup; \
-	fi
-	cp -f ./xresources $(XRESOURCES)
+all: $(XINITRC) $(BACKUP_DIR) $(BASHRC) $(XRESOURCES)
 	feh --bg-scale ./bg.png
 
 install: install-dmenu install-slstatus install-dwm install-st
@@ -31,3 +21,15 @@ install-dwm:
 
 install-st:
 	$(MAKE) -C suckless/st install
+
+$(XINITRC): ./xinitrc
+	mkdir -p $(BACKUP_DIR)
+	cp -f $< $@
+
+$(BASHRC): ./bashrc
+	cp -b $@ $(BACKUP_DIR)/bashrc_backup
+	cp -f $< $@
+
+$(XRESOURCES): ./xresources
+	cp -b $@ $(BACKUP_DIR)/Xresources_backup
+	cp -f $< $@
