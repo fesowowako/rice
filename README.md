@@ -11,4 +11,4 @@ make
 sudo make install
 ```
 
-The packages you will need: `alacritty flameshot feh exa libxft ttf-hack ttf-joypixels`
+The packages you will need: `alacritty exa maim xclip feh xorg-xinit xorg-server libxinerama ttf-jetbrains-mono-nerd`
