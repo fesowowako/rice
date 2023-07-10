@@ -157,9 +157,6 @@ alias stat='git status'  # 'status' is protected name so using 'stat' instead
 alias tag='git tag'
 alias newtag='git tag -a'
 
-# get error messages from journalctl
-alias jctl="journalctl -p 3 -xb"
-
 # gpg encryption
 # verify signature for isos
 alias gpg-check="gpg2 --keyserver-options auto-key-retrieve --verify"
